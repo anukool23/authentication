@@ -4,7 +4,6 @@ import cors from "cors";
 import connectToDatabase from "./config/db";
 import { APP_ORIGIN, NODE_ENV, PORT } from "./constants/env";
 import errorHandler from "./middleware/errorHandler";
-import catchErrors from "./utils/cathcErrors";
 import { OK } from "./constants/http";
 import authRoutes from "./routes/auth.route";
 
