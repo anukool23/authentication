@@ -157,7 +157,7 @@ export const verifyEmail = async (code:string)=>{
     const validCode = await verificationCodeModel.findOne({
         _id:code,
         type:VerificationCodeTypes.EmailVerification,
-        expiredAt:{$gt:new Date() },
+        expiresAt:{$gt:new Date() },
     });
     appAssert(validCode, NOT_FOUND, "Invalid or expired verification code");
 
