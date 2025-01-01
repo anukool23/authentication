@@ -193,6 +193,7 @@ export const verifyEmail = async (code:string)=>{
 
 export const sendPasswordResendEmail = async (email:string) =>{
   //get the user by email
+  try{
   const user = await UserModel.findOne({email});
   appAssert(user, NOT_FOUND, "User not found");
 
@@ -213,7 +214,7 @@ export const sendPasswordResendEmail = async (email:string) =>{
   });
 
   //send verification email;
-  const url = `${APP_ORIGIN}password/reset?code'${verificationCode._id}&exp=${verificationCode.expiresAt.getTime()}`;
+  const url = `${APP_ORIGIN}/password/reset?code=${verificationCode._id}&exp=${verificationCode.expiresAt.getTime()}`;
   const {data, error} = await sendMail({
     to:user.email,
     ...getPasswordResetTemplate(url),
@@ -224,6 +225,10 @@ export const sendPasswordResendEmail = async (email:string) =>{
   return{
     url, emailId:data?.data?.id
   };
+}
+catch(error:any){
+  console.log("SendPasswordResetEmail",error.message);
+}
 };
 
 type ResetPasswordParams = {
