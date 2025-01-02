@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -8,6 +8,7 @@ import ResetPassword from './pages/ResetPassword';
 import AppContainer from './components/AppContainer';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import { setNavigate } from './lib/navigation';
 
 
 export const Home = () => {
@@ -18,6 +19,8 @@ export const Home = () => {
   );
 }
 function App() {
+  const navigate = useNavigate();
+  setNavigate(navigate)
   return (
  <Routes>
    <Route path="/" element={<AppContainer />} >
